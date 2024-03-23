@@ -1,89 +1,90 @@
-const apartment = {
-    type: 'rent',
-    disposition: '3+1',
-    area: {
-      floorage: 100,
-      balcony: 2,
-      units: 'sqm',
-    },
-    city: 'Prague',
-    district: 'Old Town',
-    price: {
-      rent: 28000,
-      fees: {
-        water: 1000,
-        energy: 2500,
-        services: 560,
-      },
-      currency: 'czk',
-    },
-    ownership: 'personal',
-    condition: 'renovated',
-    status: 'free',
-    floor: 3,
+/*
+V JavaScriptovém programu si založte proměnnou title a uložte 
+do ní název svého oblíbeného filmu (např. Pán prstenů). 
+Proveďte následující úkoly.
+
+Vypište do stránky počet znaků názvu.
+Vypište název filmu převedený na velká písmena.
+Vypište z názvu prvních pět písmen.
+Vypište z názvu posledních pět písmen
+*/
+
+const title = "Forest Gump"
+
+document.body.innerHTML += title.length
+document.body.innerHTML += "<br />"
+document.body.innerHTML += title.toUpperCase()
+document.body.innerHTML += "<br />"
+document.body.innerHTML += title.slice(0,5)
+document.body.innerHTML += "<br />"
+document.body.innerHTML += title.slice(-5, title.length)
+document.body.innerHTML += "<br />"
+
+/*
+Vytvořte stránku, která bude pracovat s e-mailovými adresami ve formátu
+
+jmeno.prijmeni@domena
+Tedy například:
+
+petr.novak@gmail.com
+romana.nejedla@czechitas.cz
+slavomir.ponuchalek@yahoo.com
+Postupujte dle následujících kroků.
+
+Vytvořte jednoduchou webovou stránku s JavaScriptovým programem.
+Nechte uživatele zadat jeho e-mail a uložte si jej do proměnné email.
+Pomocí metody indexOf najděte v tomto e-mailu pozici znaku zavináč. 
+Tuto pozici si uložte do proměnné atIndex.
+Pomocí metody slice získejte z e-mailu první část představující uživatelské jméno uživatele.
+Dále z e-mailu získejte název domény tedy například gmail.com.
+Ze získaných informací vytvořte objekt, který bude vypadat například takto:
+const parsedEmail = {
+  userName: 'slavomir.ponuchalek',
+  domain: 'yahoo.com',
 };
+Pro kontrolu vypište tento objekt do stránky. Každou hodnotu vypište jako odstavec.
+*/
 
-document.body.innerHTML += apartment.disposition
-document.body.innerHTML += apartment.price.rent
-document.body.innerHTML += apartment.area.floorage + apartment.area.units + " Balkonu:" + apartment.area.balcony 
+const inputEmail = prompt("Zadej svoji emailovou adresu")
+let indexEmail = inputEmail.indexOf('@')
 
-let mesto = apartment.city
-let cast = apartment.district
+const parsedEmail = {
+    userName: inputEmail.slice(0,indexEmail),
+    domain: inputEmail.slice(indexEmail + 1)
+}
+document.body.innerHTML += "<hr />"
+document.body.innerHTML += "<h2> Emaily: </h2>"
+document.body.innerHTML += "<p> username: <strong>" + parsedEmail.userName + "</strong></p>"
+document.body.innerHTML += "<p> domain: <strong>" + parsedEmail.domain + "</strong></p>"
 
-apartment.status = "taken"
 /*
 
-Vytvořte webovou stránku s JavaScriptem, zkopírujte si tento kód do vašeho programu a vyřešte následující úkoly.
+Vytvořte webovou stránku, kde uživatel zadá svoji adresu například pro účely doručení 
+objednaného zboží. Požaduje ulici, číslo domu, město a PSČ.
 
-Pomocí tečkové notace vypište do stránky dispozici bytu.
-Vypište do stránky čistý nájem bez poplatků.
-Vypište do stránky celý objekt představující výměru bytu.
-Do separátních proměnných uložte město a městskou část. Vypište je do stránky.
-Změnte stav inzerátu z 'free' na 'taken'.
+Uložte všechny údaje do vhodně pojmenovaných proměnných.
+Ze zadanách údajů sestavte pomocí interpolace řetězeců obsahující HTML ve formátu jako níže
+<address>
+  <p>Pod Stájemi 67</p>
+  <p>12754 Klysnov</p>
+</address>
+Pomocí document.body.innerHTML vložte sestavené HTML do stránky.
 
 */
 
 
-/*V JavaScriptovém programu vytvořte objekt představující jednu knihu v knihovně. Uvažte, jaké vlastnosti může taková kniha mít. Rozhodně budeme chtít název, autora a počet stran. Přidejte do objektu alespoň tři další vlastnosti tak, aby obsahovaly čísla, řetězce i vnořený objekt.
-Vytvořte alespoň jednu další knihu se stejnými vlastnostmi ale jinými hodnotami.*/
-
-const book1 = {
-  name: 'Harry Potter a Kámen mudrců', 
-  author: 'J.K. Rowling',
-  pages: '420',
-  sales: {
-    earns: 100000,
-    country: 'CZ'
-  }
+const address = {
+    street: prompt("Zadej ulici:"),
+    houseNumber: prompt("Zadej číslo domu:"),
+    postcode: prompt("Zadej PSČ:")
 }
 
-const book2 = {
-  name: 'Harry Potter a Tajemná komnata', 
-  author: 'J.K. Rowling',
-  pages: '380',
-  sales: {
-    earns: 10000,
-    country: 'SK'
-  }
-}
+document.body.innerHTML += "<hr />"
+document.body.innerHTML += "<h2> Adresa: </h2>"
 
-/*
-Pokračujme v našem registračním systému na očkováni. Zatím se umíme uživatele zeptat na jméno a věk.
-
-Vytvořte objekt person, do kterého vložte uživatelem zadané údaje. Objekt bude mít následující strukturu
-{
-  name: 'Květoslav Voňavý',
-  age: 67,
-}
-Přidejte do objektu person údaj o tom, v jakém jazyce si uživatel přeje komunikovat. Zjistěte jej z objektu window.
-Poté, co uživatel zadá všechny údaje, vypište do stránky objekt person se všemi jeho vlastnostmi v nějakém hezkém formátu a zkontrolujte, že obsahuje správné informace.
-*/
-
-
-const person = {
-  name: prompt("Zadej jméno registrovaného pacienta"),
-  age: Number(prompt("Zadej věk registrovaného pacienta")),
-  location: window.navigator.language
-}
-
-console.log(person)
+document.body.innerHTML += `
+<address>
+    <p> ${address.street} ${address.houseNumber} </p>
+    <p> ${address.postcode} </p>
+</address>
+`
