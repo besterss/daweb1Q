@@ -1,90 +1,75 @@
 /*
-V JavaScriptovém programu si založte proměnnou title a uložte 
-do ní název svého oblíbeného filmu (např. Pán prstenů). 
-Proveďte následující úkoly.
+V předchozí lekci jsem vytvářeli stránku pro registraci na očkování. 
+Chtěli jsme po uživateli jméno a věk. Nyní budeme chtít, 
+aby uživatel zadal také heslo. To bychom v pozdější verzi aplikaci mohli použít 
+například k přihlášení do systému.
 
-Vypište do stránky počet znaků názvu.
-Vypište název filmu převedený na velká písmena.
-Vypište z názvu prvních pět písmen.
-Vypište z názvu posledních pět písmen
+Vytvořte novou stránku, nebo pokračujte ve stránce z předchozí lekce pro registraci 
+na očkování.
+
+Nejdříve nechte uživatele zadat všechny hodnoty, tedy jméno, věk i heslo. 
+Uložte si je do dobře pojmenovaných proměnných.
+Napište první podmínku, ve které zkontrolujte, že věk uživatele je větší nebo roven 65.
+Pokud ano, vypište do stránky „věk v pořádku“. 
+Pokud uživateli není alespoň 65 let, vypište „nízký věk“.
+Napište druhou podmínku, která zkontroluje, zda je zadané heslo delší než osm znaků.
+Pokud není, vypište „slabé heslo“. Heslo se bude kontrolovat pouze v případě, 
+kdy uživatel splnil první podmínku (věk alespoň 65 let).
 */
 
-const title = "Forest Gump"
+const userName = prompt("Zadej své jméno")
+const userAge = Number(prompt("Zadej svůj věk"))
+const userPassword = prompt("Zadej svoje heslo")
 
-document.body.innerHTML += title.length
-document.body.innerHTML += "<br />"
-document.body.innerHTML += title.toUpperCase()
-document.body.innerHTML += "<br />"
-document.body.innerHTML += title.slice(0,5)
-document.body.innerHTML += "<br />"
-document.body.innerHTML += title.slice(-5, title.length)
-document.body.innerHTML += "<br />"
-
-/*
-Vytvořte stránku, která bude pracovat s e-mailovými adresami ve formátu
-
-jmeno.prijmeni@domena
-Tedy například:
-
-petr.novak@gmail.com
-romana.nejedla@czechitas.cz
-slavomir.ponuchalek@yahoo.com
-Postupujte dle následujících kroků.
-
-Vytvořte jednoduchou webovou stránku s JavaScriptovým programem.
-Nechte uživatele zadat jeho e-mail a uložte si jej do proměnné email.
-Pomocí metody indexOf najděte v tomto e-mailu pozici znaku zavináč. 
-Tuto pozici si uložte do proměnné atIndex.
-Pomocí metody slice získejte z e-mailu první část představující uživatelské jméno uživatele.
-Dále z e-mailu získejte název domény tedy například gmail.com.
-Ze získaných informací vytvořte objekt, který bude vypadat například takto:
-const parsedEmail = {
-  userName: 'slavomir.ponuchalek',
-  domain: 'yahoo.com',
-};
-Pro kontrolu vypište tento objekt do stránky. Každou hodnotu vypište jako odstavec.
-*/
-
-const inputEmail = prompt("Zadej svoji emailovou adresu")
-let indexEmail = inputEmail.indexOf('@')
-
-const parsedEmail = {
-    userName: inputEmail.slice(0,indexEmail),
-    domain: inputEmail.slice(indexEmail + 1)
-}
-document.body.innerHTML += "<hr />"
-document.body.innerHTML += "<h2> Emaily: </h2>"
-document.body.innerHTML += "<p> username: <strong>" + parsedEmail.userName + "</strong></p>"
-document.body.innerHTML += "<p> domain: <strong>" + parsedEmail.domain + "</strong></p>"
-
-/*
-
-Vytvořte webovou stránku, kde uživatel zadá svoji adresu například pro účely doručení 
-objednaného zboží. Požaduje ulici, číslo domu, město a PSČ.
-
-Uložte všechny údaje do vhodně pojmenovaných proměnných.
-Ze zadanách údajů sestavte pomocí interpolace řetězeců obsahující HTML ve formátu jako níže
-<address>
-  <p>Pod Stájemi 67</p>
-  <p>12754 Klysnov</p>
-</address>
-Pomocí document.body.innerHTML vložte sestavené HTML do stránky.
-
-*/
-
-
-const address = {
-    street: prompt("Zadej ulici:"),
-    houseNumber: prompt("Zadej číslo domu:"),
-    postcode: prompt("Zadej PSČ:")
+if(userAge >= 65) {
+    document.body.innerHTML += "<strong> VĚK JE V POŘÁDKU </strong>"
+    if(userPassword.length >= 8) {
+        document.body.innerHTML += "<strong style=\"color: green\"> REGISTRACE PROBĚHLA V POŘÁDKU </strong>"
+    }else{
+        document.body.innerHTML += "<strong style=\"color: red;\"> REGISTRACE NENÍ V POŘÁDKU Z DŮVODU SLABÉHO HESLA</strong>"
+    }
+}else{
+    document.body.innerHTML += "<strong style=\"color: red;\"> VĚK NENÍ V POŘÁDKU </strong>"
 }
 
 document.body.innerHTML += "<hr />"
-document.body.innerHTML += "<h2> Adresa: </h2>"
+document.body.innerHTML += "Vstupenky divadlo"
+
+/*
+Pokusme se o základ jednoduchého rezervačního sestému pro vstupenky do divadla.
+
+Založte si webovou stránku s JavaScriptem.
+Nechte uživatele zadat jeho věk.
+Vytvořte si proměnnou plnaCena, udávající základní cenu vstupenky a uložte do ní hodnotu 12.
+Vytvořte podmínku, která do proměnné cena uloží cenu spočítanou 
+podle věku uživatele dle následujících pravidel:
+0 euro pro návštěvníky mladší 6 let,
+65 % ze základní ceny pro návštěvníky 6 až 26 let (žák, student),
+100 % ze základní ceny pro návštěvníky 27 až 64 let (dospělý),
+50 % ze základní ceny pro ostatní (senior).
+
+Nezapomeňte na zaokrouhlování, ať nám cena vyjde v celých eurech.
+Nakonec spočtenou cenu vypište s nějakou hezkou zprávou na výstup.
+*/
+
+const clientAge = Number(prompt("Zadej svůj věk"))
+
+const plnaCena = 12
+
+let celkovaCena
+
+if(clientAge > 64) {
+    celkovaCena = plnaCena * 0.5
+}else if(clientAge > 27) {
+    celkovaCena = plnaCena
+}else if(clientAge > 6) {
+    celkovaCena = plnaCena * 0.65
+}else{
+    celkovaCena = 0
+}
 
 document.body.innerHTML += `
-<address>
-    <p> ${address.street} ${address.houseNumber} </p>
-    <p> ${address.postcode} </p>
-</address>
+<div style="max-width: 400px; padding: 30px; border: 1 px solid black; background-color: #008744; color: white; font-style: bold">
+    Vaše konečná cena vstupenky v košíku je: ${Math.floor(celkovaCena)}€ 
+</div>
 `
