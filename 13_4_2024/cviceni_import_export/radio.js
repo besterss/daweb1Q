@@ -23,11 +23,14 @@ export const radio = [
   ];
 
 export const renderNavigation = (radio) => {
-    const elementNav = document.getElementById('navigation')
+    const elementNav = document.querySelector('header')
+    elementNav.innerHTML += '<ul>'
 
     radio.forEach((radio) => {
         elementNav.innerHTML += `<li> <a href="${radio.link}">  ${radio.name} </a> </li>`
     })
+
+    elementNav.innerHTML += '</ul>'
 }
 
 export const renderRadioStation = (radioId) => {
