@@ -11,5 +11,6 @@ let nahodnyIndex = Math.floor(Math.random() * quotes.length)
 document.querySelector('#quote').innerHTML = render(
   <div className="quoteExample">
     <p>{ quotes[nahodnyIndex].quote}</p>
+    <p>Můj náhodny index je: {nahodnyIndex}</p>
   </div>
 );
