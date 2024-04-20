@@ -77,7 +77,7 @@ document.querySelector('#root').innerHTML = render(
   <div className="container">
     <header>
       <div className="logo"></div>
-      <h1>Webová aplikace - Česká města</h1>
+      <h1>Webová aplikace - Česká města!!!</h1>
     </header>
     <main>
       <ShowCities />
