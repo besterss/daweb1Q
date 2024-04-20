@@ -1,25 +1,15 @@
 import './index.css'
 
-const InputArea = () => {
-
-    const nickname = ''
-    const message = ''
-
-    const handleSubmit = (event) => {
-        console.log(event)
+const Form = () => {
+    const handleSubmit = (e) => {
+      console.log(e);
     }
-
-    const changeNickname = () => {
-        console.log(this)
-    }
-
+  
     return (
-        <>
-            <div>
-                
-            </div>
-        </>
-    )
+      <form onSubmit={handleSubmit()}>
+        <button type="submit">Submit</button>
+      </form>
+    );
 }
 
 export const Chat = () => {
@@ -28,7 +18,7 @@ export const Chat = () => {
         <>
             <h1> Vítej v chatu </h1>
             <br />
-            <InputArea />
+            <Form />
         </>
     )
 }
