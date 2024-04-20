@@ -10,6 +10,23 @@ const data = await response_data.json();
 
 // Řešení č.2:
 
+const Venue = (props) => {
+  return (
+    <>
+      <strong>{props.venue}</strong>
+    </>
+  )
+}
+
+const Instructor = (props) => {
+  
+  return (
+    <>
+      <strong>{props.instructor}</strong>
+    </>
+  )
+}
+
 const WorkshopInfo = (props) => {
   console.log(props)
 
@@ -35,6 +52,6 @@ document.querySelector('#root').innerHTML = render(
 
     <hr />
     <h2>Řešení č.2:</h2>
-    <WorkshopInfo title={data.data.title} description={data.data.description} price={data.data.price} />
+    <WorkshopInfo title={data.data.title} description={data.data.description} price={data.data.price} dalsi="ahoj"/>
   </div>
 );
